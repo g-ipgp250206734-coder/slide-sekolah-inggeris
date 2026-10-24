@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sekolah Inggeris dan Sekolah Mubaligh</title>
+<style>
+:root{--navy:#18283d;--navy2:#263b52;--cream:#f6f0e4;--paper:#fffaf0;--gold:#c49a55;--maroon:#783e42;--ink:#26313c;--muted:#6a6b68;--line:#e3d7c2;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+button{font:inherit;cursor:pointer}
+.page{max-width:1120px;margin:auto;padding:24px}
+.hero{position:relative;overflow:hidden;border-radius:22px;background:linear-gradient(120deg,rgba(24,40,61,.97),rgba(38,59,82,.91)),repeating-linear-gradient(45deg,#fff 0 2px,transparent 2px 8px);color:#fff;padding:clamp(28px,6vw,64px);border:1px solid #b28d53;box-shadow:0 14px 32px #1b2b3b20}
+.hero:after{content:"";position:absolute;width:220px;height:220px;border:1px solid #d6b87866;border-radius:50%;right:-55px;top:-65px;box-shadow:0 0 0 18px #d6b87810,0 0 0 38px #d6b87810}
+.eyebrow{font:700 12px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#e3c68d}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:clamp(30px,4.5vw,50px);line-height:1.12;margin:12px 0 18px;max-width:760px}
+.hero p{max-width:720px;color:#f1eadf;font-size:17px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.btn{border:1px solid var(--gold);border-radius:999px;padding:11px 18px;background:var(--gold);color:#17263a;font-weight:700}
+.btn.secondary{background:transparent;color:#fff;border-color:#c8b17f}
+.audio-panel{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin:18px 0 28px;padding:14px 18px;background:#fffaf0;border:1px solid var(--line);border-radius:14px}
+.audio-panel small{display:block;color:var(--muted);font-family:Arial,sans-serif}
+.toggle{background:var(--navy);color:white;border:0;border-radius:999px;padding:9px 14px;font-family:Arial,sans-serif;font-weight:700}
+.section-head{margin:34px 0 16px}
+.section-head .eyebrow{color:var(--maroon)}
+.section-head h2{font-size:clamp(24px,3vw,34px);color:var(--navy);margin:6px 0}
+.section-head p{color:var(--muted);max-width:780px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tab{border:1px solid var(--line);border-radius:16px;background:var(--paper);padding:18px;text-align:left;min-height:135px;transition:.2s;color:var(--ink)}
+.tab:hover,.tab[aria-selected="true"]{border-color:var(--gold);box-shadow:0 7px 20px #293b4a12;transform:translateY(-2px)}
+.tab .num{font:700 12px Arial,sans-serif;color:var(--maroon);letter-spacing:1px}
+.tab strong{display:block;font-size:19px;color:var(--navy);margin:7px 0}
+.tab span:last-child{font-size:14px;color:var(--muted)}
+.detail{margin-top:14px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:clamp(20px,4vw,32px);min-height:240px}
+.detail h3{color:var(--maroon);font-size:25px;margin-bottom:10px}
+.detail p{max-width:850px}
+.detail ul{padding-left:22px}
+.callout{border-left:4px solid var(--gold);padding:12px 16px;background:#f2e8d6;border-radius:0 10px 10px 0;margin:18px 0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.info-card{background:#fffaf0;border:1px solid var(--line);border-radius:16px;padding:20px}
+.info-card h3{font-size:21px;color:var(--navy);margin-bottom:8px}
+.tag{display:inline-block;background:#eadbc0;color:#503c2d;border-radius:999px;padding:4px 9px;font:700 11px Arial,sans-serif;letter-spacing:.4px;margin-bottom:10px}
+.quiz{background:var(--navy);color:white;border-radius:20px;padding:clamp(22px,4vw,34px);margin-top:34px}
+.quiz h2{color:#f1d7a4;font-size:29px}
+.quiz .sub{color:#d6dce4}
+.question{border-top:1px solid #ffffff2b;padding:18px 0}
+.question p{font-weight:700;margin-bottom:10px}
+.option{display:block;width:100%;text-align:left;border:1px solid #ffffff45;background:#263b52;color:white;padding:10px 13px;border-radius:10px;margin:7px 0}
+.option:hover{border-color:#e3c68d}
+.option.chosen{border-color:#e3c68d;background:#42546a}
+.feedback{font-size:14px;min-height:22px;color:#f1d7a4;margin-top:7px}
+#quizResult{font-weight:700;margin-top:15px}
+.footer{padding:26px 4px 8px;color:var(--muted);font-size:13px}
+.source-note{background:#eee4d2;padding:16px;border-radius:12px;font-size:14px}
+@media(max-width:700px){.page{padding:14px}.tabs,.two-col{grid-template-columns:1fr}.tab{min-height:0}.hero{border-radius:16px}}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="hero">
+    <div class="eyebrow">Penerokaan sejarah pendidikan</div>
+    <h1>Sekolah Inggeris dan Sekolah Mubaligh</h1>
+    <p>Teroka bagaimana sekolah aliran Inggeris berkembang semasa penjajahan British, ciri pendidikannya dan peranan pertubuhan mubaligh. Pilih kad di bawah untuk membuka penerangan ringkas.</p>
+    <div class="hero-actions">
+      <button class="btn" id="startBtn">Mula Meneroka ↓</button>
+      <button class="btn secondary" id="musicHero">♫ Muzik: Hidup/Mati</button>
+    </div>
+  </header>
+
+  <section class="audio-panel" aria-label="Kawalan audio">
+    <div><strong>Kawalan audio</strong><small>Muzik latar boleh dimatikan pada bila-bila masa. Kesan klik dimainkan apabila kad atau jawapan dipilih.</small></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="toggle" id="musicToggle" aria-pressed="false">♫ Muzik Mati</button>
+      <button class="toggle" id="soundToggle" aria-pressed="true">♪ Kesan Klik Hidup</button>
+    </div>
+  </section>
+
+  <section id="explore">
+    <div class="section-head">
+      <div class="eyebrow">Pilih satu topik</div>
+      <h2>Kenali sistem persekolahan</h2>
+      <p>Baca setiap kad untuk mengetahui fakta utama. Kandungan membezakan ciri umum sekolah aliran Inggeris daripada sejarah khusus sesebuah sekolah.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Topik penerokaan">
+      <button class="tab" role="tab" aria-selected="true" data-panel="asal">
+        <span class="num">TOPIK 01</span><strong>Latar belakang</strong><span>Mengapa sekolah ini berkembang?</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-panel="ciri">
+        <span class="num">TOPIK 02</span><strong>Ciri pendidikan</strong><span>Bahasa, kurikulum dan pembelajaran</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-panel="mubaligh">
+        <span class="num">TOPIK 03</span><strong>Peranan mubaligh</strong><span>Sumbangan dan tujuan penubuhan</span>
+      </button>
+    </div>
+    <article class="detail" id="detail" aria-live="polite">
+      <span class="tag">LATAR BELAKANG</span>
+      <h3>Mengapa sekolah Inggeris berkembang?</h3>
+      <p>Semasa pemerintahan British, sekolah aliran Inggeris berkembang terutamanya di bandar dan pusat pentadbiran. Sekolah-sekolah ini berkait dengan keperluan pentadbiran kolonial, aktiviti ekonomi dan permintaan terhadap pendidikan berbahasa Inggeris.</p>
+      <div class="callout"><strong>Maklumat penting:</strong> Sekolah aliran Inggeris menggunakan bahasa Inggeris sebagai bahasa pengantar dan menawarkan pembelajaran yang merangkumi kemahiran bahasa serta mata pelajaran akademik. Walau bagaimanapun, kurikulum, kemudahan dan peluang pendidikan berbeza mengikut jenis sekolah dan lokasi.</div>
+    </article>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">Banding dan fahami</div>
+      <h2>Sekolah Inggeris dan sekolah mubaligh</h2>
+      <p>Kedua-dua istilah ini berkait, tetapi tidak membawa maksud yang sama sepenuhnya.</p>
+    </div>
+    <div class="two-col">
+      <article class="info-card">
+        <span class="tag">SEKOLAH ALIRAN INGGERIS</span>
+        <h3>Bahasa pengantar</h3>
+        <p>Bahasa Inggeris menjadi bahasa utama pengajaran di sekolah aliran Inggeris. Kandungan pembelajaran dan peluang melanjutkan pelajaran boleh berbeza mengikut sekolah dan zaman.</p>
+      </article>
+      <article class="info-card">
+        <span class="tag">SEKOLAH MUBALIGH</span>
+        <h3>Peranan pertubuhan agama</h3>
+        <p>Sebahagian sekolah ditubuhkan atau dikendalikan oleh pertubuhan mubaligh Kristian. Selain pendidikan, kegiatan keagamaan juga boleh menjadi sebahagian daripada identiti sekolah tersebut.</p>
+      </article>
+    </div>
+    <div class="callout"><strong>Ingat:</strong> banyak sekolah mubaligh menggunakan bahasa Inggeris, tetapi “sekolah Inggeris” merujuk kepada aliran bahasa pengantar, manakala “sekolah mubaligh” merujuk kepada latar penubuhan atau pengendalinya.</div>
+  </section>
+
+  <section class="quiz" id="quiz">
+    <div class="eyebrow">Semak pemahaman</div>
+    <h2>Uji pengetahuan kamu</h2>
+    <p class="sub">Pilih satu jawapan bagi setiap soalan. Tekan “Semak jawapan” untuk melihat markah dan maklum balas.</p>
+    <div class="question" data-answer="1">
+      <p>1. Apakah bahasa pengantar utama di sekolah aliran Inggeris?</p>
+      <button class="option" data-value="0">Bahasa Melayu</button>
+      <button class="option" data-value="1">Bahasa Inggeris</button>
+      <button class="option" data-value="2">Bahasa Tamil</button>
+      <div class="feedback"></div>
+    </div>
+    <div class="question" data-answer="2">
+      <p>2. Apakah yang membezakan sekolah mubaligh daripada istilah sekolah Inggeris?</p>
+      <button class="option" data-value="0">Semua sekolah mubaligh hanya menerima satu kaum</button>
+      <button class="option" data-value="1">Sekolah mubaligh tidak mempunyai kurikulum</button>
+      <button class="option" data-value="2">Sekolah mubaligh dikaitkan dengan pertubuhan mubaligh yang menubuhkan atau mengendalikannya</button>
+      <div class="feedback"></div>
+    </div>
+    <div class="question" data-answer="0">
+      <p>3. Pernyataan manakah paling tepat?</p>
+      <button class="option" data-value="0">Sekolah Inggeris dan sekolah mubaligh berkait, tetapi istilahnya tidak semestinya sama</button>
+      <button class="option" data-value="1">Semua sekolah Inggeris ialah sekolah kerajaan sahaja</button>
+      <button class="option" data-value="2">Semua sekolah mubaligh menggunakan bahasa Melayu sebagai bahasa pengantar</button>
+      <div class="feedback"></div>
+    </div>
+    <button class="btn" id="checkQuiz">Semak jawapan</button>
+    <button class="btn secondary" id="resetQuiz">Cuba semula</button>
+    <div id="quizResult" aria-live="polite"></div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">Rumusan</div>
+      <h2>Apakah yang perlu diingati?</h2>
+    </div>
+    <div class="source-note">
+      Sekolah aliran Inggeris merupakan sebahagian daripada perkembangan pendidikan semasa penjajahan British. Sekolah mubaligh pula menunjukkan peranan pertubuhan agama dalam penyediaan pendidikan. Untuk memahami sejarah dengan tepat, lihat latar penubuhan, bahasa pengantar, kandungan pembelajaran dan komuniti yang mendapat akses kepada sekolah.
+      <br><br><strong>Nota sumber:</strong> Gunakan sumber sejarah atau buku teks yang boleh disahkan untuk menambah contoh sekolah, tarikh penubuhan dan gambar arkib. Jangan anggap semua sekolah mempunyai ciri yang seragam.
+    </div>
+  </section>
+  <footer class="footer">Bahan pembelajaran interaktif • Pendidikan Zaman Penjajahan British</footer>
+</main>
+
+<audio id="bgMusic" src="assets/muzik-latar.mp3" loop preload="none"></audio>
+<audio id="clickSound" src="assets/sound-click.mp3" preload="auto"></audio>
+<script>
+const detailData = {
+ asal: {
+  tag:"LATAR BELAKANG",
+  title:"Mengapa sekolah Inggeris berkembang?",
+  body:"Semasa pemerintahan British, sekolah aliran Inggeris berkembang terutamanya di bandar dan pusat pentadbiran. Sekolah-sekolah ini berkait dengan keperluan pentadbiran kolonial, aktiviti ekonomi dan permintaan terhadap pendidikan berbahasa Inggeris.",
+  callout:"Sekolah aliran Inggeris berkembang dalam konteks pentadbiran kolonial dan keperluan pendidikan berbahasa Inggeris. Peluang serta kemudahan yang tersedia berbeza mengikut lokasi dan jenis sekolah."
+ },
+ ciri: {
+  tag:"CIRI PENDIDIKAN",
+  title:"Bahasa pengantar dan pembelajaran",
+  body:"Bahasa Inggeris menjadi bahasa pengantar utama dalam sekolah aliran Inggeris. Kandungan pembelajaran boleh merangkumi kemahiran bahasa, ilmu asas dan mata pelajaran yang dianggap berguna untuk pendidikan lanjutan atau pekerjaan. Kurikulum dan kemudahan tidak semestinya seragam antara sekolah.",
+  callout:"Sekolah aliran Inggeris menggunakan bahasa Inggeris sebagai bahasa pengantar dan menawarkan pembelajaran yang merangkumi kemahiran bahasa serta mata pelajaran akademik. Kurikulum, kemudahan dan peluang pendidikan berbeza mengikut jenis sekolah dan lokasi."
+ },
+ mubaligh: {
+  tag:"PERANAN MUBALIGH",
+  title:"Sumbangan pertubuhan mubaligh",
+  body:"Pertubuhan mubaligh Kristian menubuhkan atau mengendalikan sebahagian sekolah di Tanah Melayu dan Borneo. Sekolah tertentu menyediakan pendidikan berbahasa Inggeris, dan ada yang turut menawarkan pendidikan kepada kanak-kanak perempuan. Peranan serta matlamat setiap sekolah bergantung pada pertubuhan dan konteks setempat.",
+  callout:"Sekolah mubaligh ditubuhkan atau dikendalikan oleh pertubuhan mubaligh. Sebahagian daripadanya menggunakan bahasa Inggeris, tetapi sekolah aliran Inggeris tidak semestinya semuanya sekolah mubaligh."
+ }
+};
+const detail = document.getElementById("detail");
+const bgMusic = document.getElementById("bgMusic");
+const clickSound = document.getElementById("clickSound");
+let musicOn = false, soundOn = true;
+function playClick(){ if(!soundOn) return; try{clickSound.currentTime=0; clickSound.play().catch(()=>{});}catch(e){} }
+function setMusic(on){
+ musicOn=on;
+ const btn=document.getElementById("musicToggle");
+ btn.textContent=on?"♫ Muzik Hidup":"♫ Muzik Mati";
+ btn.setAttribute("aria-pressed",String(on));
+ if(on){bgMusic.volume=0.18; bgMusic.play().catch(()=>{musicOn=false;btn.textContent="♫ Muzik Mati";btn.setAttribute("aria-pressed","false");});}
+ else{bgMusic.pause();}
+}
+document.getElementById("musicToggle").addEventListener("click",()=>{playClick();setMusic(!musicOn)});
+document.getElementById("musicHero").addEventListener("click",()=>{playClick();setMusic(!musicOn)});
+document.getElementById("soundToggle").addEventListener("click",e=>{soundOn=!soundOn;e.currentTarget.textContent=soundOn?"♪ Kesan Klik Hidup":"♪ Kesan Klik Mati";e.currentTarget.setAttribute("aria-pressed",String(soundOn));if(soundOn)playClick();});
+document.getElementById("startBtn").addEventListener("click",()=>{playClick();document.getElementById("explore").scrollIntoView({behavior:"smooth"});});
+document.querySelectorAll(".tab").forEach(tab=>tab.addEventListener("click",()=>{
+ playClick();
+ document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected","false"));
+ tab.setAttribute("aria-selected","true");
+ const d=detailData[tab.dataset.panel];
+ detail.innerHTML=`<span class="tag">${d.tag}</span><h3>${d.title}</h3><p>${d.body}</p><div class="callout"><strong>Maklumat penting:</strong> ${d.callout}</div>`;
+}));
+document.querySelectorAll(".question").forEach(q=>{
+ q.querySelectorAll(".option").forEach(btn=>btn.addEventListener("click",()=>{
+  playClick(); q.querySelectorAll(".option").forEach(b=>b.classList.remove("chosen"));btn.classList.add("chosen");q.dataset.selected=btn.dataset.value;
+ }));
+});
+document.getElementById("checkQuiz").addEventListener("click",()=>{
+ playClick();let score=0;
+ document.querySelectorAll(".question").forEach(q=>{
+  const fb=q.querySelector(".feedback");
+  if(q.dataset.selected===undefined){fb.textContent="Pilih satu jawapan dahulu.";fb.style.color="#f1d7a4";}
+  else if(q.dataset.selected===q.dataset.answer){score++;fb.textContent="Betul!";fb.style.color="#bfe2c3";}
+  else{fb.textContent="Belum tepat. Semak semula penerangan di atas.";fb.style.color="#ffd0c5";}
+ });
+ document.getElementById("quizResult").textContent=`Markah kamu: ${score}/3`;
+});
+document.getElementById("resetQuiz").addEventListener("click",()=>{
+ playClick();
+ document.querySelectorAll(".question").forEach(q=>{delete q.dataset.selected;q.querySelectorAll(".option").forEach(b=>b.classList.remove("chosen"));q.querySelector(".feedback").textContent="";});
+ document.getElementById("quizResult").textContent="";
+});
+</script>
+</body>
+</html>
